@@ -4,23 +4,39 @@ study("Daily and Weekly EMA's on any time frame chart", shorttitle="Zan.EMA", ov
 
 // Take input for which daily SMAs to use
 
+DailyEMAInput50 = input(title="Daily EMA 50", type=input.integer, minval=1, step=1, defval=50)
+DailyEMAInput100 = input(title="Daily EMA 100", type=input.integer, minval=1, step=1, defval=100)
+DailyEMAInput200 = input(title="Daily EMA 200", type=input.integer, minval=1, step=1, defval=200)
+
 
 WeeklyEMAInput50 = input(title="Weekly EMA 50", type=input.integer, minval=1, step=1, defval=50)
 WeeklyEMAInput100 = input(title="Weekly EMA 100", type=input.integer, minval=1, step=1, defval=100)
 WeeklyEMAInput200 = input(title="Weekly EMA 200", type=input.integer, minval=1, step=1, defval=200)
 
 // Evaluate EMA's
+EMA50Daily = ema(close, DailyEMAInput50)
+EMA100Daily = ema(close, DailyEMAInput100)
+EMA200Daily = ema(close, DailyEMAInput200)
+
 EMA50Weekly = ema(close, WeeklyEMAInput50)
 EMA100Weekly = ema(close, WeeklyEMAInput100)
 EMA200Weekly = ema(close, WeeklyEMAInput200)
 
 // Grab the Daily EMAs for the ticker
+plotDailyEMA50 = security(syminfo.tickerid, 'D', EMA50Daily)
+plotDailyEMA100 = security(syminfo.tickerid, 'D', EMA100Daily)
+plotDailyEMA200 = security(syminfo.tickerid, 'D', EMA200Daily)
+
 plotWeeklyEMA50 = security(syminfo.tickerid, 'W', EMA50Weekly)
 plotWeeklyEMA100 = security(syminfo.tickerid, 'W', EMA100Weekly)
 plotWeeklyEMA200 = security(syminfo.tickerid, 'W', EMA200Weekly)
 
 // Plot the EMAs
-plot(plotWeeklyEMA50, linewidth=1, color=color.blue, transp=25,title="50-W")
-plot(plotWeeklyEMA100, linewidth=1, color=color.purple, transp=25,title="100-W")
-plot(plotWeeklyEMA200, linewidth=1, color=color.yellow, transp=25,title="200-W")
+plot(plotDailyEMA50, linewidth=1, color=color.blue, transp=25,title="50-D")
+plot(plotDailyEMA100, linewidth=1, color=color.purple, transp=25,title="100-D")
+plot(plotDailyEMA200, linewidth=1, color=color.red, transp=25,title="200-D")
+
+plot(plotWeeklyEMA50, linewidth=2, color=color.blue, transp=25,title="50-W")
+plot(plotWeeklyEMA100, linewidth=2, color=color.purple, transp=25,title="100-W")
+plot(plotWeeklyEMA200, linewidth=2, color=color.red, transp=25,title="200-W")
  
