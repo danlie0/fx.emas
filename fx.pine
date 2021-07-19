@@ -1,0 +1,26 @@
+
+//@version=4
+study("Daily and Weekly EMA's on any time frame chart", shorttitle="Zan.EMA", overlay=true)
+
+// Take input for which daily SMAs to use
+
+
+WeeklyEMAInput50 = input(title="Weekly EMA 50", type=input.integer, minval=1, step=1, defval=50)
+WeeklyEMAInput100 = input(title="Weekly EMA 100", type=input.integer, minval=1, step=1, defval=100)
+WeeklyEMAInput200 = input(title="Weekly EMA 200", type=input.integer, minval=1, step=1, defval=200)
+
+// Evaluate EMA's
+EMA50Weekly = ema(close, WeeklyEMAInput50)
+EMA100Weekly = ema(close, WeeklyEMAInput100)
+EMA200Weekly = ema(close, WeeklyEMAInput200)
+
+// Grab the Daily EMAs for the ticker
+plotWeeklyEMA50 = security(syminfo.tickerid, 'W', EMA50Weekly)
+plotWeeklyEMA100 = security(syminfo.tickerid, 'W', EMA100Weekly)
+plotWeeklyEMA200 = security(syminfo.tickerid, 'W', EMA200Weekly)
+
+// Plot the EMAs
+plot(plotWeeklyEMA50, linewidth=1, color=color.blue, transp=25,title="50-W")
+plot(plotWeeklyEMA100, linewidth=1, color=color.purple, transp=25,title="100-W")
+plot(plotWeeklyEMA200, linewidth=1, color=color.yellow, transp=25,title="200-W")
+ 
