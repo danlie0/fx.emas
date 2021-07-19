@@ -2,7 +2,7 @@
 //@version=4
 study("Daily and Weekly EMA's on any time frame chart", shorttitle="Zan.EMA", overlay=true)
 
-// Take input for which daily SMAs to use
+// Take input for which daily EMAs to use
 
 DailyEMAInput50 = input(title="Daily EMA 50", type=input.integer, minval=1, step=1, defval=50)
 DailyEMAInput100 = input(title="Daily EMA 100", type=input.integer, minval=1, step=1, defval=100)
